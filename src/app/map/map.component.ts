@@ -11,7 +11,7 @@ import { MapDetailService } from '../map-detail.service';
 })
 
 
-export class MapComponent  implements AfterViewInit{
+export class MapComponent {
   constructor(private mapDetailService: MapDetailService) {}
 
   @ViewChild('map') mapElement!: ElementRef;
@@ -19,40 +19,17 @@ export class MapComponent  implements AfterViewInit{
   selectedCountry: string = '';
 
   
-/* commented out to try a different approach
   onClick(event: MouseEvent) {
     const target = event.target as SVGPathElement;
     if (target.tagName === 'path') {
       const countryName = target.id;
       this.selectedCountry = countryName;
     }
-*/
-
-  ngAfterViewInit() {
-    
-    if (this.mapElement){
-
-    
-    const svg = this.mapElement.nativeElement as SVGElement;
-    const paths = svg.querySelectorAll('path');
-
-    paths.forEach(path => {
-      path.addEventListener('click', (event: MouseEvent) => {
-        const target = event.target as SVGPathElement;
-        const countryID = target.id;
-        this.mapDetailService.setSelectedCountry(countryID);
-        console.log('Click happened');
-        
-      })
-    })
   }
+
+  
+  
     
-  }
- /* commented out while testing above code.
-  shareData(this.selectedCountry) {
-    this.mapDetailService.setSelectedCountry(this.selectedCountry);
-  }
-    */
     //const selectedCountry = event ? (event.target as SVGPathElement)
       
   }

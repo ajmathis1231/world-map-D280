@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { count } from 'rxjs';
 import { MapDetailService } from '../map-detail.service';
+import { ApiCallService } from '../api-call.service';
 
 
 @Component({
@@ -13,7 +13,9 @@ import { MapDetailService } from '../map-detail.service';
 
 
 export class MapComponent {
-  constructor(private mapDetailService: MapDetailService) {
+  constructor(private mapDetailService: MapDetailService,
+              private apiClassService: ApiCallService
+  ) {
     this.selectedCountry
   }
 
@@ -33,10 +35,12 @@ export class MapComponent {
       this.selectedCountry = countryName;
       this.mapDetailService.setSelectedCountry(this.selectedCountry);
       this.mapDetailService.setSelectedCountryID(this.selectedCountryID);
+      }
     }
-  }
-
-   }      
+    //create api call here, after selection is made, api will be called
+    this.apiClassService.makeAPICall();
+   }   
+     
   }
 
 

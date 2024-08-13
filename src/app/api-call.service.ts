@@ -6,7 +6,7 @@ import { MapDetailService } from './map-detail.service';
 })
 export class ApiCallService {
   private queryURL: string = 'https://api.worldbank.org/v2/country/'
-  private queryTarget: string = 'ex';
+  private queryTarget: string = '';
   private queryFormat: string = '?format=json'
   private finalURL: string = this.queryURL + this.queryTarget + this.queryFormat;
   status: number = 0;
@@ -20,6 +20,8 @@ export class ApiCallService {
   constructor(private mapDetailService: MapDetailService) {
     this.mapDetailService.selectedCountryID$.subscribe(country => {
       this.queryTarget = country;
+      this.finalURL = this.queryURL + this.queryTarget + this.queryFormat;
+
     })
    }
 
@@ -29,12 +31,17 @@ export class ApiCallService {
     xhr.responseType = "json";
     xhr.open('GET', this.finalURL);
     xhr.send();
+    console.log("api call func " + this.queryTarget + ' '+ this.finalURL)
    }
 
    responseReceivedHandler(){
     if (this.status === 200) {
-      console.log("successful api call" + this.queryTarget);
+      console.log("successful api call " + this.queryTarget);
+      
 
+    }
+    else {
+      console.log("status not 200");
     }
 
    }

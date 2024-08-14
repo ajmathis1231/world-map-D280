@@ -1,11 +1,15 @@
 <aside class="details-aside">
-    <ul>Facts about {{selectedCountry}}
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-    </ul>
-    <p>{{selectedCountryID}}</p>
+    <p *ngIf="countryData">
+        <b>Country:</b> {{countryData.name || selectedCountry}} <br />
+        <b>Capital City:</b> {{ countryData.capitalCity}} <br />
+        <b>Region:</b> {{ countryData.region?.value }} <br />
+        <b>Income Level:</b> {{ countryData.incomeLevel?.value}} <br />
+        <b>Lending Type:</b> {{ countryData.lendingType?.value}} <br />
+        <b>Coordinates:</b> {{ countryData.longitude}}, {{countryData.latitude}}<br />
+
+
+    </p>
+    <p *ngIf="!countryData">Error: No data available</p>
+   <!-- <p>{{selectedCountryID}}</p> 
+    removed after testing was complete, left in for future debugging-->
 </aside>

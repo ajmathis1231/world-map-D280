@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 
 export class MapDetailService {
+  
   private selectedCountrySubject = new BehaviorSubject<string>('');
   selectedCountry$ = this.selectedCountrySubject.asObservable();
 

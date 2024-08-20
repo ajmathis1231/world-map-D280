@@ -1,0 +1,9 @@
+.map-section {
+    width: 70%;
+    position: fixed;
+}
+.nav-bar {
+    margin-right: 10px;
+    width: 100%;
+    height: 20px;
+}

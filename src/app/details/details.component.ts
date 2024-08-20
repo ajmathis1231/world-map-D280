@@ -23,7 +23,6 @@ interface CountryData {
   imports: [MapComponent, NgIf],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
- // providers: [MapDetailService]
 })
 
 export class DetailsComponent implements OnInit {
@@ -53,26 +52,12 @@ export class DetailsComponent implements OnInit {
     })
 
     this.apiCallService.detailsData$.subscribe((data) => {
-     /*
-      if (data && data[1] && data[1][0]) {
-        this.countryData = data[1][0] as unknown as CountryData;
-      } 
-*/
+     
       if (data) {
         this.countryData = data as unknown as CountryData;
       }
-      else {
-        console.error("invalid response data format, from details.component.ts detailsData$.subscribe");
-      }
+      
     });
-
-   /* this.apiCallService.capital$.subscribe((city: string) => {
-      this.capital = city;
-    })
-    console.log(this.capital);
-    */
-    //subscriber for apiCallService data needed to populate detail table
-    
     
   }
 

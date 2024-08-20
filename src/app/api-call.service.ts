@@ -17,30 +17,15 @@ export class ApiCallService {
 
   constructor(private mapDetailService: MapDetailService, private http: HttpClient) {
     this.mapDetailService.selectedCountryID$.subscribe(country => {
+      console.log(this.queryTarget);
       this.queryTarget = country;
       this.finalURL = this.queryURL + this.queryTarget + this.queryFormat;
-
+      console.log('API URL = ' + this.finalURL);
     })
    }
-/*
-makeAPICall() {
-  this.http.get<any>(this.finalURL).subscribe(
-    (response) => {
-      this.status = 200;
-      console.log("successful API call " + this.queryTarget);
-      try {
-        this.responseData = response;
-        const detailsData = this.extractDetailsData(this.responseData);
-        this.responseDataSubject.next(detailsData);
-      }
-      catch(error){
-        console.error("Error parsing API response v2:", error);
 
-      }
-    }
-  )
-}
-  */
+   
+
 makeAPICall() {
   this.http.get<any>(this.finalURL)
     .pipe(
@@ -53,7 +38,7 @@ makeAPICall() {
     .subscribe(response => {
       const detailsData = this.extractDetailsData(response);
       this.responseDataSubject.next(detailsData);
-      console.log(".subscribe works");
+      console.log(".subscribe works" + detailsData);
     });
 }
   
@@ -72,7 +57,7 @@ makeAPICall() {
   
    
   private responseDataSubject = new BehaviorSubject<string>('');
-  detailsData$: Observable<string> =this.responseDataSubject.asObservable(); //still cant figure out why this wont work.  will try again.
+  detailsData$: Observable<string> =this.responseDataSubject.asObservable(); 
 
   
 
